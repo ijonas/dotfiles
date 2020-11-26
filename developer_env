@@ -1,26 +1,9 @@
-# export EC2_HOME=$HOME/bin/ec2
-# export PATH=$PATH:$EC2_HOME/bin
-# export EC2_URL=https://ec2.us-east-1.amazonaws.com
-# export EC2_PRIVATE_KEY=`ls $EC2_HOME/ea_pem/pk-*.pem`
-# export EC2_CERT=`ls $EC2_HOME/ea_pem/cert-*.pem`
-# export AWS_ACCOUNT_NO=511927138091
-
-export TMP=$HOME/tmp
 export RACK_ENV=development
 export EDITOR="vim"
 export GOPATH=$HOME
-export AWS_CONFIG_FILE=/etc/aws.conf
-export DOCKER_HOST=tcp://localhost:4243
-export GOROOT=/home/ubuntu/go
-export PATH=/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/.node/bin:$HOME/.gem/ruby/1.8/bin:$GOROOT/bin:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:$HOME/bin/elastic/bin:$PATH
-export PS1="%{$fg_bold[yellow]%}%m $PS1"
+export PATH=$HOME/.local/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/.node/bin:$HOME/.gem/ruby/1.8/bin:$GOROOT/bin:$GOPATH/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:$HOME/bin/elastic/bin:$PATH
 
-export DOCKER_HOST=tcp://192.168.99.100:2376
-export DOCKER_MACHINE_NAME=default
-export DOCKER_TLS_VERIFY=1
-export DOCKER_CERT_PATH=/Users/$USER/.docker/machine/machines/default
-
-export ANSIBLE_INVENTORY=$HOME/myansible/hosts
-
-
+# export PS1="%{$fg_bold[yellow]%}%m $PS1"
+# source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# export PS1='$(kube_ps1)'$PS1
 export MYSQL_HOST=127.0.0.1

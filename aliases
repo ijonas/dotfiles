@@ -68,4 +68,11 @@ alias srx='sr-grab c'
 alias sra='sr-grab a'
 alias srr='sr-grab r'
 
+alias kgp='kubectl get pods'
+alias kgs='kubectl get services'
+alias kgi='kubectl get ingress'
+alias k='kubectl'
+alias kx='kubectl exec -it '
+alias kapp='kubectl apply -f'
+alias kdel='kubectl delete -f'
 function find_in { find . -name $1 -print | xargs grep --color=auto -inH $2; }

@@ -32,7 +32,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby rails rbenv)
+plugins=(git osx) 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -41,11 +41,15 @@ source $HOME/bin/dotfiles/private_developer_env
 source $HOME/bin/dotfiles/aliases
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "/usr/local/opt/nvm/nvm.sh"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/tmp/google-cloud-sdk/path.zsh.inc' ]; then source '/tmp/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/ijonas/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/ijonas/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/tmp/google-cloud-sdk/completion.zsh.inc' ]; then source '/tmp/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/ijonas/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/ijonas/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

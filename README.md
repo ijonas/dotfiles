@@ -1,13 +1,10 @@
-h1. Useful Scripts
+# dotfiles
 
-Some useful scripts used by Ijonas Kisselbach
+This repo contains the configuration files I use to setup my macOS and Linux environments.
 
-Use at your own peril.
+At the moment that covers:
+* aliases
+* tmux - the terminal multiplexer
+* neovim - my favourite text editor and favourite version of VIM.
 
-To initiate
-
-    mkdir -p ~/bin 
-    curl -s https://raw.githubusercontent.com/ijonas/dotfiles/master/bin/configure_for_ijonas > ~/bin/configure_for_ijonas
-    chmod 755 bin/configure_for_ijonas 
-    bin/configure_for_ijonas
 

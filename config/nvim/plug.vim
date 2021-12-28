@@ -4,11 +4,27 @@ endif
 
 call plug#begin()
 
+" Git + Github
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+
+" Code commenting in/out
 Plug 'tpope/vim-commentary'
+
+" fuzzy lookup / better ctrlp
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" Solidity
+Plug 'tomlion/vim-solidity'
+
+" React/Typescript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql'
+
 
 if has("nvim")
   Plug 'nvim-lualine/lualine.nvim'
@@ -33,8 +49,6 @@ if has("nvim")
   Plug 'rust-lang/rust.vim'
 endif
 
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 call plug#end()
 

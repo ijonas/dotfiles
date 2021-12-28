@@ -1,5 +1,7 @@
 " Description: Keymaps
 
+let mapleader = ","      " map leader to comma
+
 nnoremap <S-C-p> "0p
 " Delete without yank
 nnoremap <leader>d "_d
@@ -48,7 +50,7 @@ nmap sv :vsplit<Return><C-w>w
 nmap <Space> <C-w>w
 map s<left> <C-w>h
 map s<up> <C-w>k
-map s<down> <C-w>j
+map s<down> <C-w>
 map s<right> <C-w>l
 map sh <C-w>h
 map sk <C-w>k
@@ -60,3 +62,6 @@ nmap <C-w><right> <C-w>>
 nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
+
+"Map CTRL-P to FZF
+nnoremap <silent> <C-p> :FZF<CR>

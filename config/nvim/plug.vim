@@ -6,6 +6,9 @@ call plug#begin()
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 if has("nvim")
   Plug 'nvim-lualine/lualine.nvim'

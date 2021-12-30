@@ -35,9 +35,9 @@ if has("nvim")
   Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim51' }
   Plug 'folke/lsp-colors.nvim'
   Plug 'L3MON4D3/LuaSnip'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/nvim-cmp'
+
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'onsails/lspkind-nvim'

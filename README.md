@@ -7,4 +7,9 @@ At the moment that covers:
 * tmux - the terminal multiplexer
 * neovim - my favourite text editor and favourite version of VIM.
 
+## Dependencies
+
+    npm install -g eslint
+    npm install -g diagnostic-languageserver
+    npm install -g typescript-language-server
 

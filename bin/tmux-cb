@@ -1,0 +1,19 @@
+#! /bin/sh
+tmux new-session \; \
+  send-keys 'cd ~/proj/w/v2api && docker-compose up' C-m \; \
+  split-window -h \; \
+  send-keys 'cd ~/proj/w/v2api && npm run serve' C-m \; \
+  split-window -v \; \
+  send-keys 'cd ~/proj/w/v2api && npm run tsc' C-m \; \
+  split-window -v \; \
+  send-keys 'cd ~/proj/w/gui && npm run serve' C-m \; \
+  rename-window 'cbstack'  \; \
+  new-window \; \
+  send-keys 'cd ~/proj/w/v2api && nvim .' C-m \; \
+  rename-window 'edit-v2api'  \; \
+  new-window  \; \
+  send-keys 'cd ~/proj/w/gui && nvim .' C-m \; \
+  rename-window 'edit-gui'  \; 
+
+
+

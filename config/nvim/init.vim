@@ -238,3 +238,5 @@ set signcolumn=yes
 
 autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
 
+filetype off
+filetype plugin indent on

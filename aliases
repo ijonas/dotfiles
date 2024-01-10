@@ -68,6 +68,8 @@ alias srx='sr-grab c'
 alias sra='sr-grab a'
 alias srr='sr-grab r'
 
+
+alias krestart='kubectl rollout restart deployment'
 alias kgp='kubectl get pods'
 alias kgs='kubectl get services'
 alias kgi='kubectl get ingress'
@@ -75,4 +77,28 @@ alias k='kubectl'
 alias kx='kubectl exec -it '
 alias kapp='kubectl apply -f'
 alias kdel='kubectl delete -f'
+alias k8s_translucent='gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project translucent-345513'
+alias k8s_prod='gcloud container clusters get-credentials cb-v2-prod-cluster --zone europe-west2-c --project cb-v2-prod-stack'
+alias k8s_desktop='kubectl config use-context docker-desktop'
+alias pf-mumbai='kubectl port-forward service/chainlink-mumbai 6688'
+alias pf-ethmain='kubectl port-forward service/chainlink-ethmain 6688'
+alias pf-polymain='kubectl port-forward service/chainlink-polymain 6688'
+alias pf-rinkeby='kubectl port-forward service/chainlink-rinkeby 6688'
+alias pf-goerli='kubectl port-forward service/chainlink-goerli 6688'
+alias pf-sepolia='kubectl port-forward service/chainlink-sepolia 6688'
+alias pf-arbitrum='kubectl port-forward service/chainlink-arbitrum 6688'
+alias pf-arbtest='kubectl port-forward service/chainlink-arbtest 6688'
+alias pf-optimism='kubectl port-forward service/chainlink-optimism 6688'
+alias gssh='gcloud compute ssh --zone "us-central1-a" $1  --project "translucent-345513"'
+alias sshag='gcloud compute ssh --zone "us-central1-a" arbitrum-goerli-rpc-1  --project "translucent-345513"'
+alias ssham='gcloud compute ssh --zone "us-central1-a" arb-mainnet  --project "translucent-345513"'
+
+alias ig='ignite'
+alias igs='ignite scaffold'
+alias igcs='ignite chain serve'
+
+alias resetirv='gcloud compute instances reset --zone "us-central1-c" --project "winchurch" ws-irv-bot'
+
 function find_in { find . -name $1 -print | xargs grep --color=auto -inH $2; }
+
+function venv { source $HOME/venv/$1/bin/activate; }

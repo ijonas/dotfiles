@@ -34,11 +34,10 @@ alias edit_ssh="$EDITOR $HOME/.ssh/config"
 alias edit_env="$EDITOR $HOME/bin/dotfiles"
 alias edit_hosts="sudo $EDITOR /etc/hosts"
 alias list_ssh="cat $HOME/.ssh/config | grep Host"
-alias reload_env="source $HOME/.zshrc"
-alias vim="nvim"
+alias reload_env="source $HOME/.bashrc"
+alias vim="flatpak run io.neovim.nvim"
 alias dotfiles="cd ~/bin/dotfiles"
 alias reload_tmux="tmux source-file ~/.tmux.conf"
-alias assh="ssh -i $HOME/.ssh/id_axle_rsa"
 
 alias sd="sudo docker"
 alias dps="sudo docker ps"
@@ -68,7 +67,6 @@ alias srx='sr-grab c'
 alias sra='sr-grab a'
 alias srr='sr-grab r'
 
-
 alias krestart='kubectl rollout restart deployment'
 alias kgp='kubectl get pods'
 alias kgs='kubectl get services'
@@ -93,12 +91,7 @@ alias gssh='gcloud compute ssh --zone "us-central1-a" $1  --project "translucent
 alias sshag='gcloud compute ssh --zone "us-central1-a" arbitrum-goerli-rpc-1  --project "translucent-345513"'
 alias ssham='gcloud compute ssh --zone "us-central1-a" arb-mainnet  --project "translucent-345513"'
 
-alias ig='ignite'
-alias igs='ignite scaffold'
-alias igcs='ignite chain serve'
-
-alias resetirv='gcloud compute instances reset --zone "us-central1-c" --project "winchurch" ws-irv-bot'
+alias lenv='source venv/bin/activate'
 
 function find_in { find . -name $1 -print | xargs grep --color=auto -inH $2; }
-
 function venv { source $HOME/venv/$1/bin/activate; }

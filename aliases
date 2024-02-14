@@ -35,7 +35,6 @@ alias edit_env="$EDITOR $HOME/bin/dotfiles"
 alias edit_hosts="sudo $EDITOR /etc/hosts"
 alias list_ssh="cat $HOME/.ssh/config | grep Host"
 alias reload_env="source $HOME/.zshrc"
-alias vim="nvim"
 alias dotfiles="cd ~/bin/dotfiles"
 alias reload_tmux="tmux source-file ~/.tmux.conf"
 alias assh="ssh -i $HOME/.ssh/id_axle_rsa"
@@ -102,3 +101,6 @@ alias resetirv='gcloud compute instances reset --zone "us-central1-c" --project 
 function find_in { find . -name $1 -print | xargs grep --color=auto -inH $2; }
 
 function venv { source $HOME/venv/$1/bin/activate; }
+
+alias vim='nvim'
+alias edit_vim='nvim ~/.config/nvim/'

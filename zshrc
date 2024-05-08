@@ -55,9 +55,23 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#
-source ~/dotfiles/nvm
-source ~/dotfiles/pyenv
-source ~/dotfiles/aliases
-source ~/dotfiles/julia
-source ~/dotfiles/path
+if [[ -e ~/dotfiles/pyenv ]]; then
+    source ~/dotfiles/pyenv
+fi
+if [[ -e ~/dotfiles/aliases ]]; then
+    source ~/dotfiles/aliases
+fi
+if [[ -e ~/dotfiles/nvm ]]; then
+    source ~/dotfiles/nvm
+fi
+if [[ -e ~/dotfiles/julia ]]; then
+    source ~/dotfiles/julia
+fi
+if [[ -e ~/dotfiles/path ]]; then
+    source ~/dotfiles/path
+fi
+if [[ -e ~/dotfiles/k0s ]]; then
+    source ~/dotfiles/k0s
+fi
+
+

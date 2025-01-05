@@ -98,3 +98,7 @@ function venv { source $HOME/venv/$1/bin/activate; }
 
 alias vim='nvim'
 alias edit_vim='nvim --cmd "cd ~/.config/nvim/lua/custom/"'
+
+alias dcmp='docker compose --env-file docker/dev.env'
+alias bctest='bitcoin-cli -testnet -rpcuser=user -rpcpassword=password -rpcport=18332 -rpcconnect=100.118.141.116'
+

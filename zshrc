@@ -67,11 +67,20 @@ fi
 if [[ -e ~/dotfiles/julia ]]; then
     source ~/dotfiles/julia
 fi
+if [[ -e ~/dotfiles/golang ]]; then
+    source ~/dotfiles/golang
+fi
 if [[ -e ~/dotfiles/path ]]; then
     source ~/dotfiles/path
 fi
 if [[ -e ~/dotfiles/k0s ]]; then
     source ~/dotfiles/k0s
 fi
+if [[ -e ~/dotfiles/aws ]]; then
+    source ~/dotfiles/aws
+fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

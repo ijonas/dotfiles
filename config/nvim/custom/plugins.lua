@@ -39,7 +39,7 @@ local plugins = {
     -- You can also have it load at immediately at
     -- startup by commenting above and uncommenting below:
     -- lazy = false
-    -- opts = overrides.copilot,
+    opts = overrides.copilot,
     config = function()
       require("copilot").setup({})
     end
@@ -59,5 +59,4 @@ local plugins = {
   end
 }
   
-}
 return plugins

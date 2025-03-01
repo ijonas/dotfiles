@@ -32,9 +32,10 @@ alias glog="git log --pretty=tformat:'%h %Cblue%cr%Creset %cn %Cgreen%s%Creset'"
 
 alias edit_ssh="$EDITOR $HOME/.ssh/config"
 alias edit_env="$EDITOR $HOME/dotfiles"
+alias edit_env="nvim --cmd 'cd ~/dotfiles/' ~/dotfiles/zshrc"
 alias edit_hosts="sudo $EDITOR /etc/hosts"
 alias list_ssh="cat $HOME/.ssh/config | grep Host"
-alias reload_env="source $HOME/.bashrc"
+alias reload_env="source $HOME/.zshrc"
 alias dotfiles="cd ~/bin/dotfiles"
 alias reload_tmux="tmux source-file ~/.tmux.conf"
 
@@ -96,4 +97,4 @@ function find_in { find . -name $1 -print | xargs grep --color=auto -inH $2; }
 function venv { source $HOME/venv/$1/bin/activate; }
 
 alias vim='nvim'
-alias edit_vim='nvim ~/.config/nvim/'
+alias edit_vim='nvim --cmd "cd ~/.config/nvim/lua/custom/"'

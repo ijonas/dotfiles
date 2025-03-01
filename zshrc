@@ -55,6 +55,10 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+if [[ -e ~/.secret-env ]]; then
+    source ~/.secret-env
+fi
+
 if [[ -e ~/dotfiles/pyenv ]]; then
     source ~/dotfiles/pyenv
 fi
@@ -67,11 +71,17 @@ fi
 if [[ -e ~/dotfiles/julia ]]; then
     source ~/dotfiles/julia
 fi
+if [[ -e ~/dotfiles/golang ]]; then
+    source ~/dotfiles/golang
+fi
 if [[ -e ~/dotfiles/path ]]; then
     source ~/dotfiles/path
 fi
 if [[ -e ~/dotfiles/k0s ]]; then
     source ~/dotfiles/k0s
+fi
+if [[ -e ~/dotfiles/aws ]]; then
+    source ~/dotfiles/aws
 fi
 
 export PYENV_ROOT="$HOME/.pyenv"

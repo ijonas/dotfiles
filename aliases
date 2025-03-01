@@ -14,10 +14,10 @@ alias gc='git commit -v'
 alias gca='git commit -v -a'
 alias gb='git branch'
 alias gba='git branch -a'
-alias puom='git push origin master'
-alias plom='git pull origin master'
-alias puod='git push origin development'
-alias plod='git pull origin development'
+alias puom='git push origin main'
+alias plom='git pull origin main'
+alias puod='git push origin develop'
+alias plod='git pull origin develop'
 alias plo='git pull origin'
 alias puo='git push origin'
 
@@ -98,3 +98,19 @@ function venv { source $HOME/venv/$1/bin/activate; }
 
 alias vim='nvim'
 alias edit_vim='nvim --cmd "cd ~/.config/nvim/lua/custom/"'
+
+alias dockerstop='sudo systemctl stop docker'
+alias dockerstart='sudo systemctl stop docker'
+
+alias dcmp='docker compose --env-file docker/dev.env'
+
+alias pull_up_eat1_kex='pulumi up --stack krypton/krypton_exchange/aws_eat1'
+alias pull_down_eat1_kex='pulumi down --stack krypton/krypton_exchange/aws_eat1' 
+alias pull_up_eat1_mmb='pulumi up --stack krypton/market_making_bot_k8s/aws_eat1'
+alias pull_down_eat1_mmb='pulumi down --stack krypton/market_making_bot_k8s/aws_eat1' 
+
+alias run_frontend_tests="docker exec -it $(docker ps | grep kex-frontend-1 | awk '{print $1}') npm run test:run" 
+alias dcmp='docker compose --env-file docker/dev.env'
+alias btt='bitcoin-cli -testnet -rpcuser=$BTT_USER -rpcpassword=$BTT_PASSWORD -rpcport=18332 -rpcconnect=$BTT_HOST'
+alias btm='bitcoin-cli -rpcuser=$BTM_USER -rpcpassword=$BTM_PASSWORD -rpcport=8332 -rpcconnect=$BTM_HOST'
+

@@ -77,5 +77,3 @@ fi
 if [[ -e ~/dotfiles/k0s ]]; then
     source ~/dotfiles/k0s
 fi
-
-

@@ -39,10 +39,9 @@ alias reload_env="source $HOME/.zshrc"
 alias dotfiles="cd ~/bin/dotfiles"
 alias reload_tmux="tmux source-file ~/.tmux.conf"
 
-alias sd="sudo docker"
-alias dps="sudo docker ps"
-alias dim="sudo docker images"
-alias drim="sudo docker rmi"
+alias dps="docker ps"
+alias dim="docker images"
+alias drim="docker rmi"
 
 alias vup="FORWARD_DOCKER_PORTS=1 FORWARD_50K_PORTS=1 vagrant up"
 alias valt="vagrant halt"
@@ -109,7 +108,6 @@ alias pull_down_eat1_kex='pulumi down --stack krypton/krypton_exchange/aws_eat1'
 alias pull_up_eat1_mmb='pulumi up --stack krypton/market_making_bot_k8s/aws_eat1'
 alias pull_down_eat1_mmb='pulumi down --stack krypton/market_making_bot_k8s/aws_eat1' 
 
-alias run_frontend_tests="docker exec -it $(docker ps | grep kex-frontend-1 | awk '{print $1}') npm run test:run" 
 alias dcmp='docker compose --env-file docker/dev.env'
 alias btt='bitcoin-cli -testnet -rpcuser=$BTT_USER -rpcpassword=$BTT_PASSWORD -rpcport=18332 -rpcconnect=$BTT_HOST'
 alias btm='bitcoin-cli -rpcuser=$BTM_USER -rpcpassword=$BTM_PASSWORD -rpcport=8332 -rpcconnect=$BTM_HOST'

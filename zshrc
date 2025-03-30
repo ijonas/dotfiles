@@ -83,3 +83,6 @@ fi
 if [[ -e ~/dotfiles/aws ]]; then
     source ~/dotfiles/aws
 fi
+
+# Added by Windsurf - Next
+export PATH="/Users/ijonas/.codeium/windsurf/bin:$PATH"

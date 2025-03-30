@@ -57,6 +57,6 @@ local plugins = {
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({})
   end
+  }
 }
-  
 return plugins

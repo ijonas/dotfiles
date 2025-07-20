@@ -10,7 +10,8 @@
       "Bash(cargo run*)",
       "Bash(cargo check*)",
       "Bash(forge*)",
-      "Bash(afplay *)"
+      "Bash(afplay *)",
+      "linear*"
     ]
   }
 }

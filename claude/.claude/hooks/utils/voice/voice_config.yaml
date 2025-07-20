@@ -1,0 +1,45 @@
+# Voice Command Configuration
+# This file controls the behavior of voice commands in Claude Code
+
+audio:
+  # Audio recording settings
+  sample_rate: 16000      # Sample rate in Hz (16kHz recommended for STT)
+  channels: 1             # Number of audio channels (1=mono, 2=stereo)
+  chunk_size: 1024        # Buffer size for recording
+  format_bits: 16         # Audio bit depth (16-bit recommended)
+
+recording:
+  # Recording behavior settings
+  default_duration: 5      # Default recording duration in seconds
+  max_duration: 30        # Maximum recording duration in seconds
+  silence_threshold: 0.01 # Volume threshold for silence detection (0.0-1.0)
+  silence_duration: 2.0   # Duration of silence before stopping auto-recording
+
+stt:
+  # Speech-to-text settings
+  model_id: "scribe_v1"   # ElevenLabs STT model ID
+  language_code: "en"     # Language code for better accuracy
+  diarize: false          # Enable speaker diarization for multiple speakers
+  num_speakers: 1         # Maximum number of speakers to detect
+
+preprocessing:
+  # Voice command preprocessing settings
+  remove_artifacts: true           # Remove "um", "uh", etc.
+  transform_natural_language: true # Convert natural language to commands
+  validate_commands: true          # Validate commands for safety
+  suggest_corrections: true        # Show preprocessing suggestions
+
+listening:
+  # Continuous listening mode settings
+  wake_word: "claude"             # Wake word to trigger recording
+  max_session_minutes: 30         # Maximum listening session duration
+  silence_timeout: 2              # Silence timeout in seconds
+  wake_word_sensitivity: 0.7      # Wake word detection sensitivity (0.0-1.0)
+
+feedback:
+  # User feedback and interface settings
+  visual_recording_indicator: true  # Show recording progress
+  audio_feedback: false            # Play audio feedback sounds
+  verbose_logging: false           # Show detailed debug information
+  show_transcription: true         # Display transcribed text
+  show_preprocessing: true         # Show preprocessing changes

@@ -83,3 +83,6 @@ alias btt='bitcoin-cli -testnet -rpcuser=$BTT_USER -rpcpassword=$BTT_PASSWORD -r
 alias btm='bitcoin-cli -rpcuser=$BTM_USER -rpcpassword=$BTM_PASSWORD -rpcport=8332 -rpcconnect=$BTM_HOST'
 
 alias ws='windsurf'
+
+alias disablewg='sudo systemctl disable wg-quick@protonvpn.service'
+alias enablewg='sudo systemctl disable wg-quick@protonvpn.service'

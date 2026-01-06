@@ -14,6 +14,11 @@ COMPLETION_WAITING_DOTS="true"
 
 # User configuration
 
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -55,6 +60,7 @@ fi
 if [[ -e ~/dotfiles/aws ]]; then
     source ~/dotfiles/aws
 fi
+
 eval "$(starship init zsh)"
 
 # Added by Windsurf - Next
@@ -70,3 +76,17 @@ export NVM_DIR="$HOME/.nvm"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/home/ijonas/.opencode/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/ijonas/proj/shapeshifters/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ijonas/proj/shapeshifters/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/ijonas/proj/shapeshifters/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ijonas/proj/shapeshifters/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export JAVA_HOME=/opt/android-studio/jbr
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$JAVA_HOME/bin:$PATH:$ANDROID_HOME/platform-tools

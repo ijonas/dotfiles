@@ -56,11 +56,8 @@ return {
     },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
-      require("mason-lspconfig").setup_handlers {
-        function(server_name)
-          require("lspconfig")[server_name].setup {}
-        end,
-      }
+      -- Server configs are manually defined in configs/lspconfig.lua
+      -- mason-lspconfig will ensure servers are installed
     end,
   },
   {

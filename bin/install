@@ -1,0 +1,173 @@
+#!/bin/sh
+
+set -eu
+
+REPO_URL=${DOTFILES_REPO_URL:-git@github.com:ijonas/dotfiles.git}
+DOTFILES_DIR=${DOTFILES_DIR:-"$HOME/dotfiles"}
+INSTALL_OH_MY_ZSH=${INSTALL_OH_MY_ZSH:-1}
+
+SHARED_PACKAGES="zsh tmux nvim claude claude-code opencode"
+MACOS_PACKAGES="aerospace sketchybar"
+
+say() {
+    printf '\n==> %s\n' "$*"
+}
+
+die() {
+    printf 'Error: %s\n' "$*" >&2
+    exit 1
+}
+
+usage() {
+    cat <<'EOF'
+Install this dotfiles repository with GNU Stow.
+
+Usage: bin/install [--no-oh-my-zsh] [--help]
+
+Environment variables:
+  DOTFILES_DIR       Checkout location (default: $HOME/dotfiles)
+  DOTFILES_REPO_URL  Git clone URL (default: GitHub SSH URL)
+  INSTALL_OH_MY_ZSH  Set to 0 to skip Oh My Zsh (default: 1)
+
+The installer supports macOS and Linux. Existing files that conflict with a
+stow package are left untouched and reported by GNU Stow.
+EOF
+}
+
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --no-oh-my-zsh) INSTALL_OH_MY_ZSH=0 ;;
+        -h|--help) usage; exit 0 ;;
+        *) die "unknown option: $1" ;;
+    esac
+    shift
+done
+
+case "$(uname -s)" in
+    Darwin) OS=macos ;;
+    Linux) OS=linux ;;
+    *) die "unsupported operating system: $(uname -s)" ;;
+esac
+
+have() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+install_macos_dependencies() {
+    if ! have brew; then
+        have curl || die "curl is required to install Homebrew"
+        say "Installing Homebrew"
+        NONINTERACTIVE=1 /bin/bash -c \
+            "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+        if [ -x /opt/homebrew/bin/brew ]; then
+            PATH="/opt/homebrew/bin:$PATH"
+        elif [ -x /usr/local/bin/brew ]; then
+            PATH="/usr/local/bin:$PATH"
+        fi
+        export PATH
+        have brew || die "Homebrew installation completed, but brew is not on PATH"
+    fi
+
+    missing=""
+    for command_name in git stow zsh curl; do
+        if ! have "$command_name"; then
+            missing="$missing $command_name"
+        fi
+    done
+    if [ -n "$missing" ]; then
+        say "Installing dependencies with Homebrew:$missing"
+        # shellcheck disable=SC2086
+        brew install $missing
+    fi
+}
+
+as_root() {
+    if [ "$(id -u)" -eq 0 ]; then
+        "$@"
+    elif have sudo; then
+        sudo "$@"
+    else
+        die "root privileges are required to install dependencies (sudo was not found)"
+    fi
+}
+
+install_linux_dependencies() {
+    missing=""
+    for command_name in git stow zsh curl; do
+        if ! have "$command_name"; then
+            missing="$missing $command_name"
+        fi
+    done
+    [ -n "$missing" ] || return 0
+
+    if have apt-get; then
+        say "Installing dependencies with apt:$missing"
+        as_root apt-get update
+        # shellcheck disable=SC2086
+        as_root apt-get install -y $missing
+    elif have dnf; then
+        say "Installing dependencies with dnf:$missing"
+        # shellcheck disable=SC2086
+        as_root dnf install -y $missing
+    elif have pacman; then
+        say "Installing dependencies with pacman:$missing"
+        # shellcheck disable=SC2086
+        as_root pacman -S --needed $missing
+    elif have zypper; then
+        say "Installing dependencies with zypper:$missing"
+        # shellcheck disable=SC2086
+        as_root zypper install -y $missing
+    else
+        die "install git, stow, zsh, and curl with your package manager, then rerun"
+    fi
+}
+
+say "Detected $OS"
+if [ "$OS" = macos ]; then
+    install_macos_dependencies
+else
+    install_linux_dependencies
+fi
+
+for dependency in git stow zsh curl; do
+    have "$dependency" || die "$dependency is required but was not found after installation"
+done
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd || true)
+if [ -n "$SCRIPT_DIR" ] && [ -d "$SCRIPT_DIR/../.git" ]; then
+    REPO_DIR=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+else
+    REPO_DIR=$DOTFILES_DIR
+    if [ -e "$REPO_DIR" ]; then
+        [ -d "$REPO_DIR/.git" ] || die "$REPO_DIR exists but is not a git checkout"
+        say "Using existing checkout at $REPO_DIR"
+    else
+        say "Cloning dotfiles into $REPO_DIR"
+        git clone "$REPO_URL" "$REPO_DIR"
+    fi
+fi
+
+packages=$SHARED_PACKAGES
+if [ "$OS" = macos ]; then
+    packages="$packages $MACOS_PACKAGES"
+fi
+
+say "Installing stow packages:$packages"
+for package in $packages; do
+    [ -d "$REPO_DIR/$package" ] || die "stow package not found: $REPO_DIR/$package"
+    stow --dir="$REPO_DIR" --target="$HOME" --restow "$package"
+done
+
+if [ "$INSTALL_OH_MY_ZSH" = 1 ]; then
+    if [ -d "$HOME/.oh-my-zsh" ]; then
+        say "Oh My Zsh is already installed"
+    else
+        say "Installing Oh My Zsh"
+        RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c \
+            "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    fi
+fi
+
+say "Dotfiles installed successfully"
+printf 'Start a new zsh session with: exec zsh\n'

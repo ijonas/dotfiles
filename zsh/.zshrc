@@ -12,6 +12,14 @@
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
 
+# Oh My Zsh is installed by bin/install. Keep startup usable when it is absent.
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""
+plugins=(git)
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+fi
+
 # User configuration
 
 HISTFILE=~/.zsh_history
@@ -61,7 +69,9 @@ if [[ -e ~/dotfiles/aws ]]; then
     source ~/dotfiles/aws
 fi
 
-eval "$(starship init zsh)"
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+fi
 
 # Added by Windsurf - Next
 export PATH="/Users/ijonas/.codeium/windsurf/bin:$PATH"

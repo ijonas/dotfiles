@@ -1,23 +1,30 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
 -- Server configurations
-local servers = { "html", "cssls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
+-- Define common servers with default config
+local servers = {
+  "html",
+  "cssls",
+  "ts_ls",      -- TypeScript/JavaScript
+  "jsonls",     -- JSON
+  "tailwindcss", -- Tailwind CSS
+  "ruff",       -- Python linter/formatter
+}
+
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config[lsp] = {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
   }
+  vim.lsp.enable(lsp)
 end
 
 -- Pyright configuration
-lspconfig.pyright.setup {
+vim.lsp.config.pyright = {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -36,14 +43,18 @@ lspconfig.pyright.setup {
     },
   },
 }
+vim.lsp.enable('pyright')
 
 -- Solidity
-lspconfig.solidity_ls.setup {
+vim.lsp.config.solidity_ls = {
   capabilities = nvlsp.capabilities,
   on_attach = nvlsp.on_attach,
   filetypes = { "solidity" },
-  root_dir = lspconfig.util.root_pattern("hardhat.config.*", ".git"),
+  root_dir = function(path)
+    return vim.fs.root(path, {"hardhat.config.js", "hardhat.config.ts", ".git"})
+  end,
 }
+vim.lsp.enable('solidity_ls')
 
 -- Diagnostic configuration
 vim.diagnostic.config {

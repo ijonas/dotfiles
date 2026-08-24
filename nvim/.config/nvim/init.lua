@@ -29,6 +29,11 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
+-- Apply transparency settings after theme loads
+vim.defer_fn(function()
+	require("configs.transparency").setup()
+end, 0)
+
 require "options"
 require "nvchad.autocmds"
 

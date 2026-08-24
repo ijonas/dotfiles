@@ -1,24 +1,4 @@
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -32,11 +12,12 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git docker-compose docker pyenv)
-
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -51,10 +32,6 @@ source $ZSH/oh-my-zsh.sh
 # fi
 export EDITOR="nvim"
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 if [[ -e ~/.secret-env ]]; then
     source ~/.secret-env
 fi
@@ -62,8 +39,8 @@ fi
 if [[ -e ~/dotfiles/pyenv ]]; then
     source ~/dotfiles/pyenv
 fi
-if [[ -e ~/dotfiles/aliases ]]; then
-    source ~/dotfiles/aliases
+if [[ -e ~/.aliases ]]; then
+    source ~/.aliases
 fi
 if [[ -e ~/dotfiles/nvm ]]; then
     source ~/dotfiles/nvm
@@ -84,5 +61,32 @@ if [[ -e ~/dotfiles/aws ]]; then
     source ~/dotfiles/aws
 fi
 
+eval "$(starship init zsh)"
+
 # Added by Windsurf - Next
 export PATH="/Users/ijonas/.codeium/windsurf/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/Users/ijonas/.bun/_bun" ] && source "/Users/ijonas/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH=/home/ijonas/.opencode/bin:$PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/ijonas/proj/shapeshifters/google-cloud-sdk/path.zsh.inc' ]; then . '/home/ijonas/proj/shapeshifters/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/ijonas/proj/shapeshifters/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/ijonas/proj/shapeshifters/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export JAVA_HOME=/opt/android-studio/jbr
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$JAVA_HOME/bin:$PATH:$ANDROID_HOME/platform-tools

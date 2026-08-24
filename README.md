@@ -43,9 +43,25 @@ The installer can be configured with:
 | Option | Purpose |
 | --- | --- |
 | `--no-oh-my-zsh` | Skip the Oh My Zsh installation |
+| `--skip-PACKAGE` | Skip a stow package; repeat for multiple packages |
 | `DOTFILES_DIR=/path` | Change the clone destination from `~/dotfiles` |
 | `DOTFILES_REPO_URL=url` | Override the SSH clone URL |
 | `INSTALL_OH_MY_ZSH=0` | Skip Oh My Zsh through an environment variable |
+
+For example, to keep existing Neovim and OpenCode configurations when running
+from an existing checkout:
+
+```sh
+bin/install --skip-nvim --skip-opencode
+```
+
+To skip those packages during a remote bootstrap, pass the options after
+`sh -s --`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ijonas/dotfiles/main/bin/install | \
+  sh -s -- --skip-nvim --skip-opencode
+```
 
 Some shell fragments currently refer directly to `~/dotfiles`, so the default
 clone destination is recommended. GNU Stow stops on conflicts and leaves

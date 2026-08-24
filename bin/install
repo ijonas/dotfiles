@@ -5,6 +5,7 @@ set -eu
 REPO_URL=${DOTFILES_REPO_URL:-git@github.com:ijonas/dotfiles.git}
 DOTFILES_DIR=${DOTFILES_DIR:-"$HOME/dotfiles"}
 INSTALL_OH_MY_ZSH=${INSTALL_OH_MY_ZSH:-1}
+SKIP_PACKAGES=""
 
 SHARED_PACKAGES="zsh tmux nvim claude claude-code opencode"
 MACOS_PACKAGES="aerospace sketchybar"
@@ -22,7 +23,12 @@ usage() {
     cat <<'EOF'
 Install this dotfiles repository with GNU Stow.
 
-Usage: bin/install [--no-oh-my-zsh] [--help]
+Usage: bin/install [--no-oh-my-zsh] [--skip-PACKAGE] [--help]
+
+Options:
+  --no-oh-my-zsh  Skip the Oh My Zsh installation
+  --skip-PACKAGE  Skip a stow package (may be specified more than once)
+  -h, --help      Show this help
 
 Environment variables:
   DOTFILES_DIR       Checkout location (default: $HOME/dotfiles)
@@ -37,6 +43,7 @@ EOF
 while [ "$#" -gt 0 ]; do
     case "$1" in
         --no-oh-my-zsh) INSTALL_OH_MY_ZSH=0 ;;
+        --skip-?*) SKIP_PACKAGES="$SKIP_PACKAGES ${1#--skip-}" ;;
         -h|--help) usage; exit 0 ;;
         *) die "unknown option: $1" ;;
     esac
@@ -153,8 +160,21 @@ if [ "$OS" = macos ]; then
     packages="$packages $MACOS_PACKAGES"
 fi
 
+for skipped_package in $SKIP_PACKAGES; do
+    case " $SHARED_PACKAGES $MACOS_PACKAGES " in
+        *" $skipped_package "*) ;;
+        *) die "unknown package to skip: $skipped_package" ;;
+    esac
+done
+
 say "Installing stow packages:$packages"
 for package in $packages; do
+    case " $SKIP_PACKAGES " in
+        *" $package "*)
+            say "Skipping stow package: $package"
+            continue
+            ;;
+    esac
     [ -d "$REPO_DIR/$package" ] || die "stow package not found: $REPO_DIR/$package"
     stow --dir="$REPO_DIR" --target="$HOME" --restow "$package"
 done

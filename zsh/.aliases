@@ -86,3 +86,5 @@ alias ws='windsurf'
 
 alias disablewg='sudo systemctl disable wg-quick@protonvpn.service'
 alias enablewg='sudo systemctl disable wg-quick@protonvpn.service'
+
+alias cdx='codex --dangerously-bypass-approvals-and-sandbox resume'
